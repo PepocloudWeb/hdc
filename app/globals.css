@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #fff8ec;
+  --color-paper: #fffdf7;
+  --color-ink: #2a1a2e;
+  --color-cranberry: #d7263d;
+  --color-berry: #9b1b4b;
+  --color-pine: #0f7b5f;
+  --color-mint: #7fe0c0;
+  --color-gold: #ffb627;
+  --color-candy: #ff5d8f;
+  --color-ice: #4cc9f0;
+  --color-plum: #6a3fb5;
+  --color-tangerine: #ff7a1a;
+
+  --font-display: var(--font-fredoka), ui-rounded, system-ui, sans-serif;
+  --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-marquee: marquee 28s linear infinite;
+  --animate-twinkle: twinkle 1.6s ease-in-out infinite;
+  --animate-swing: swing 3.5s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+  50% { transform: translateY(-12px) rotate(var(--r, 0deg)); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 1; filter: brightness(1.15); }
+  50% { opacity: 0.45; filter: brightness(0.8); }
+}
+@keyframes swing {
+  0%, 100% { transform: rotate(-6deg); }
+  50% { transform: rotate(6deg); }
+}
+@keyframes snowfall {
+  from { transform: translate3d(0, -10vh, 0); }
+  to { transform: translate3d(var(--drift, 20px), 110vh, 0); }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  overflow-x: clip;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* candy-cane stripe band */
+.candy-stripe {
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--color-cranberry) 0 18px,
+    #fff 18px 36px
+  );
+}
+
+/* ticket perforation edges */
+.ticket {
+  --notch: 18px;
+  mask:
+    radial-gradient(circle var(--notch) at 0 50%, #0000 98%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--notch) at 100% 50%, #0000 98%, #000) right / 51% 100% no-repeat;
+}
+
+.confetti-bg {
+  background-image:
+    radial-gradient(circle at 12% 18%, var(--color-gold) 0 4px, transparent 5px),
+    radial-gradient(circle at 78% 12%, var(--color-candy) 0 5px, transparent 6px),
+    radial-gradient(circle at 88% 72%, var(--color-ice) 0 4px, transparent 5px),
+    radial-gradient(circle at 22% 82%, var(--color-mint) 0 5px, transparent 6px),
+    radial-gradient(circle at 52% 48%, var(--color-tangerine) 0 3px, transparent 4px);
+}
+
+.snowflake {
+  position: absolute;
+  top: 0;
+  color: #fff;
+  user-select: none;
+  animation: snowfall linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
